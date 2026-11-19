@@ -12,6 +12,8 @@ jobs:
     # step 3; install npm packages
     # step 4: run linter
     # step 5: run tests
+    # step 6: docker login
+    # step 7: docker build and push
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -37,5 +39,21 @@ jobs:
       - name: Run tests
         working-directory: ./frontend
         run: npm run test
+
+      - name: Docker login
+        uses: docker/login-action@v4
+        with:
+          username: ${{vars.DOCKERHUB_USERNAME}}
+          password: ${{secrets.DOCKERHUB_TOKEN}}
+
+      - name: Docker Build and Push
+        uses: docker/build-push-action@v7
+        with:
+          context: ./frontend
+          file: ./frontend/Dockerfile
+          push: true
+          tags: ${{vars.DOCKERHUB_USERNAME}}/devboard-frontend:latest
+
+
 
 
