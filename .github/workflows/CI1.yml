@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+
+jobs:  
+  frontend:
+    # for frontend
+    # step 1: checkout code
+    # step 2; setup nodejs
+    # step 3; install npm packages
+    # step 4: run linter
+    # step 5: run tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install npm packages
+        run: npm ci
+
+      - name: Run linter
+        run: npm run lint
+
+      - name: Run tests
+        run: npm run test
+
+
