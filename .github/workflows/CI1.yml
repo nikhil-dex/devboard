@@ -26,14 +26,12 @@ jobs:
         
 
       - name: Install npm packages
+        run: npm install
         working-directory: ./frontend
-        run: npm ci
+        
 
       - name: Run linter
-        uses: wearerequired/lint-action@v3
-        with:
-          eslint: true
-          prettier: true
+        run: npm run lint
 
       - name: Run tests
         run: npm run test
