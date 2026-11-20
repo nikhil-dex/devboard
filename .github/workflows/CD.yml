@@ -1,11 +1,12 @@
 name: CD
 #sudo apt-get update && sudo apt-get install docker.io docker-compose-v2 -y
 on:
-  workflow_run:
-    workflows: ['CI']
-    types: [completed]
-    branches:
-      - 'master'
+  workflow_call:
+  # workflow_run:
+  #   workflows: ['CI']
+  #   types: [completed]
+  #   branches:
+  #     - 'master'
 
 jobs:
   deploy:

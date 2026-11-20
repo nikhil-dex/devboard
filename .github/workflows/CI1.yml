@@ -104,6 +104,12 @@ jobs:
           push: true
           tags: ${{vars.DOCKERHUB_USERNAME}}/devboard-backend:latest
 
+  deploy:
+    needs: [frontend,backend]
+    uses: ./.github/workflows/CD.yml
+    secrets: inherit
+
+
 
 
 
