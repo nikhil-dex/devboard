@@ -52,7 +52,9 @@ jobs:
           context: ./frontend
           file: ./frontend/Dockerfile
           push: true
-          tags: ${{vars.DOCKERHUB_USERNAME}}/devboard-frontend:latest
+          tags: |
+            ${{vars.DOCKERHUB_USERNAME}}/devboard-frontend:latest
+            ${{vars.DOCKERHUB_USERNAME}}/devboard-frontend:${{ github.sha }}
 
 
 
@@ -102,7 +104,9 @@ jobs:
           context: ./backend
           file: ./backend/Dockerfile
           push: true
-          tags: ${{vars.DOCKERHUB_USERNAME}}/devboard-backend:latest
+          tags: |
+            ${{vars.DOCKERHUB_USERNAME}}/devboard-backend:latest
+            ${{vars.DOCKERHUB_USERNAME}}/devboard-backend:${{ github.sha }}
 
   deploy:
     needs: [frontend,backend]
